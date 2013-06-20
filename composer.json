@@ -1,0 +1,10 @@
+{
+    "name": "mesd/presentation-calendar-bundle",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "description": "Presentation Calendar Bundle",
+    "autoload": {
+        "psr-0": { "MESD\\Presentation\\CalendarBundle": "" }
+    },
+    "target-dir": "MESD/Presentation/CalendarBundle"
+}

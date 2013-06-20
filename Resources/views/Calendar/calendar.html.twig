@@ -1,0 +1,53 @@
+{# btn-group is a class in the twitter bootstrap, so this might not look all that great without it, but you can always have your own css sheet that has a class btn-group to make this appear as you want #}
+<div class='calendar-control-bar'>
+    <span class='btn-group calendar-button-group'>
+        {% if scope == 'Month' %}
+            <a href='#' class='btn calendar-button-disabled'>Month</a>
+        {% else %}
+            <a class='btn calendar-button' href='#' onClick="$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': 'Month', 'timestamp': time.timestamp}) }}');">Month</a>
+        {% endif %}
+        {% if scope == 'Week' %}
+            <a href='#' class='btn calendar-button-disabled'>Week</a>
+        {% else %}
+            <a class='btn calendar-button' href='#' onClick="$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': 'Week', 'timestamp': time.timestamp}) }}');">Week</a>
+        {% endif %}
+        {% if scope == 'Day' %}
+            <a href='#' class='btn calendar-button-disabled'>Day</a>
+        {% else %}
+            <a class='btn calendar-button' href='#' onClick="$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': 'Day', 'timestamp': time.timestamp}) }}');">Day</a>
+        {% endif %}
+    </span>
+    <span class='calendar-date-display'>
+        {% if scope == 'Month' %}
+            <h3 class='calendar-date'>{{ time|date('F Y') }}</h3>
+        {% elseif scope == 'Week' %}
+            <h3 class='calendar-date'>Week {{ time|date('W Y') }}</h3>
+        {% else %}
+            <h3 class='calendar-date'>{{ time|date('F jS Y') }}</h3>
+        {% endif %}
+    </span>
+    {# this sets the variable superscope to be a higher scope (year for month and week and month for week) for the << and >> buttons #}
+    {% if scope == 'Month' %}
+        {% set superscope = 'Year' %}
+    {% elseif scope == 'Week' %}
+        {% set superscope = 'Year' %}
+    {% else %}
+        {% set superscope = 'Month' %}
+    {% endif %}
+    <span class='btn-group calendar-button-group'>
+        <a class='btn calendar-button' href='#' onClick="$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['-1 ', superscope]|join)|date('U')}) }}');">&laquo;</a>
+        <a class='btn calendar-button' href='#' onClick="$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['-1 ', scope]|join)|date('U')}) }}');">&lt;</a>
+        <a class='btn calendar-button' href='#' onClick="$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': 'now'|date('U')}) }}');">today</a>
+        <a class='btn calendar-button' href='#' onClick="$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['+1 ', scope]|join)|date('U')}) }}');">&gt;</a>
+        <a href='#' class='btn calendar-button' onClick="$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['+1 ', superscope]|join)|date('U')}) }}');">&raquo;</a>
+    </span>
+</div>
+<div class='calendar-display'>
+    {% if scope == 'Month' %}
+        {% render url('calendar_display_month', {'calendarService': calendar_service, 'params': params, 'scope': 'Month', 'timestamp': time.timestamp}) %}
+    {% elseif scope == 'Week' %}
+        {% render url('calendar_display_week', {'calendarService': calendar_service, 'params': params, 'scope': 'Week', 'timestamp': time.timestamp}) %}
+    {% elseif scope == 'Day' %} 
+        {% render url('calendar_display_day', {'calendarService': calendar_service, 'params': params, 'scope': 'Day', 'timestamp': time.timestamp}) %}
+    {% endif %}
+</div>

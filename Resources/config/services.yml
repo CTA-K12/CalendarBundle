@@ -1,0 +1,7 @@
+parameters:
+#    mesd_calendar_calendar.example.class: MESD\Presentation\CalendarBundle\Example
+
+services:
+#    mesd_calendar_calendar.example:
+#        class: %mesd_calendar_calendar.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

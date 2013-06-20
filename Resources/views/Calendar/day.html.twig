@@ -1,0 +1,58 @@
+{#<div class='calendar-day'>
+    <div class='calendar-day-header' style='width:14%; border-style: solid; border-width: 1px; border-color: #cccccc; overflow: hidden'>
+        <strong>{{ day|date('l M jS') }}<strong>
+    </div>
+     <div class='calendar-day-body' style='width:14%; border-style: solid; border-width: 1px; border-color: #cccccc; height: 200px; overflow: hidden'>
+        <small>{{ day|date('j') }}</small>
+        {% for event in events %}
+            <div class='calendar-event'>
+                {{ event.event|raw }}
+            </div>
+        {% endfor %}
+    </div>
+</div> #}
+
+{# Create a table to represent the monthly calendar with the td's being the day and th being the names of the days #}
+<div class='calendar-single-day'>
+    <table class='calendar-day-layout'>
+        <tr class='calendar-days-header'>
+            <th>{{ day|date('l M jS') }}</th>
+        </tr>
+        {# MULTIDAY EVENT LOOP #}
+        {# This creates an empty div that stretches a whole week between the bottom of the date number and the bottom of the day cell #}
+        <tr><td class='calendar-multiday-bar'>
+            <div class='calendar-multiday-event-container'>
+                {# MULTIDAY #}
+                {% for event in events if event.startDate.format('Y-m-d') <= day|date('Y-m-d') and event.endDate.format('Y-m-d') >= day|date('Y-m-d') and event.isMultiDay %}
+                    <div class='calendar-multiday-event-week'>
+                        {{ event.event|raw }}
+                    </div>
+                {% endfor %}
+                {# END MULTIDAY EVENT LOOP #}
+            </div>
+        </td></tr>
+        <tr class='calendar-month-days'>
+            {# If the day is today, then give it speical theming #}
+            {% if day|date('Y-m-d') == 'now'|date('Y-m-d') %}
+                <td class='calendar-today-single'>
+            {% else %}
+                <td class='calendar-day-single'>
+            {% endif %}
+                <div class='calendar-day-date'>{{ day|date('j') }}</div>
+                {# SINGLE DAY EVENT LOOP #}
+                <div class='calendar-single-event-container'>
+                    {% for event in events if not event.isMultiDay and event.startDate.format('Y-m-d') == day|date('Y-m-d')%}
+                        <div class='calendar-single-event'>
+                            {{ event.event|raw }}
+                        </div>
+                    {% endfor %} 
+                </div>
+            </td>
+        </tr>
+    </table>
+    {# START EVENT WEEK LOOP #}
+    {% for w in range(0, 0) %}
+        
+    {% endfor %}
+    {# END EVENT WEEK LOOP #}
+</div>
