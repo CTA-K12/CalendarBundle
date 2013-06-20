@@ -18,7 +18,7 @@ MESD Calendar Bundle (ver. 0.1)
 * Calendar currently only has one out of the box theme
 * CSS file and Twig files are still messy
 
-## [Getting Started Using the Calendar Bundle](getting_started.md)
-## [Help and Documentation](table_of_contents.md)
-## [The Current TODO List for the Project](todo.md)
+## [Getting Started Using the Calendar Bundle](Resources/doc/getting_started.md)
+## [Help and Documentation](Resources/doc/table_of_contents.md)
+## [The Current TODO List for the Project](Resources/doc/todo.md)
 
