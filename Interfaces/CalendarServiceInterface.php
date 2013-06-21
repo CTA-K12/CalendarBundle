@@ -1,6 +1,6 @@
 <?php
 
-namespace MESD\Presentation\CalendarService\Interfaces;
+namespace MESD\Presentation\CalendarBundle\Interfaces;
 
 interface CalendarServiceInterface 
 {
