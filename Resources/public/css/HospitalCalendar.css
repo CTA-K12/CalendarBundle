@@ -175,10 +175,12 @@
 .calendar-month-othermonth-day {
     width: 10em;
     height: 10em;
+    border-top: 1px solid #bf873f;
+    border-left: 1px solid #bf873f;
     vertical-align: top;
     z-index: -1;
-    background-image: linear-gradient(#c97e6f, #b0513e);
-    color: #F1D4AF;
+    background-image: linear-gradient(#d8ac72, #bf873f);
+    color: #774F38;
     box-shadow: 0 1px 0 rgba(255,255,255,0.05) inset, 1px 0 0 rgba(255,255,255,0.05) inset;
 }
 
