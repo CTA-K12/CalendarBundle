@@ -231,7 +231,7 @@
 }
 
 .calendar-message-box, .calendar-message-box-defaultcolor {
-
+    text-shadow: 0 0px 0 rgba(0,0,0,1.0);
 }
 
 .calendar-message-box-defaultcolor {
