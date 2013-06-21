@@ -2,7 +2,7 @@
 
 namespace MESD\Presentation\CalendarService\Interfaces;
 
-Interface CalendarServiceInterface 
+interface CalendarServiceInterface 
 {
     /*
      * This event should be called by the calendar controller (any class implementing
