@@ -1,17 +1,3 @@
-{#<div class='calendar-day'>
-    <div class='calendar-day-header' style='width:14%; border-style: solid; border-width: 1px; border-color: #cccccc; overflow: hidden'>
-        <strong>{{ day|date('l M jS') }}<strong>
-    </div>
-     <div class='calendar-day-body' style='width:14%; border-style: solid; border-width: 1px; border-color: #cccccc; height: 200px; overflow: hidden'>
-        <small>{{ day|date('j') }}</small>
-        {% for event in events %}
-            <div class='calendar-event'>
-                {{ event.event|raw }}
-            </div>
-        {% endfor %}
-    </div>
-</div> #}
-
 {# Create a table to represent the monthly calendar with the td's being the day and th being the names of the days #}
 <div class='calendar-single-day'>
     <table class='calendar-day-layout'>

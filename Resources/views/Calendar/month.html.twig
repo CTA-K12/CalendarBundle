@@ -1,85 +1,3 @@
-{# 
-    The month view twig is similar to the week twig, though with a loop and
-    some tweaks to the loop to work for the month view
- #}
-{# <div class='calendar-month'>
-    {% for w in range(0, (start.diff(end).days) / 7) %}
-        {# this if block is here to generate a space between the calendar rows.  There should be an easier way, but I can't get anything else to work as of now #}
-        {#{% if loop.index0 != 0 %}
-            <div class='calendar-month-rowbreak' style='height: 20px; width: 100%; float: left'>
-            </div>
-        {% endif %}
-        <div class='calendar-week'>
-            <div class='calendar-week-header'>
-                {% for d in range(w * 7, (w * 7) + 6) %}
-                    <div class='day-header' style='float: left; width:14%; border-style: solid; border-width: 1px; border-color: #cccccc'>
-                        {% if current|date('Y-m') == start|date_modify(['+', d, ' day']|join)|date('Y-m') %}
-                            <strong>{{ start|date_modify(['+', d, ' day']|join)|date('l M jS') }}</strong>
-                        {% else %}
-                            {{ start|date_modify(['+', d, ' day']|join)|date('l M jS') }}
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            </div>
-            <div class='calendar-week-body calendar-week-multiday'>
-                <div class='multiday-body' style='float: left; width: 99%; border-style: dotted; border-width: 1px; border-color: #cccccc'>
-                    {# Multiday events
-                        Starts by placing the first multiday event for the time period in its place then after that each multiday event is checked whether its start is after the last event's end date, if it is place it after the last event, else wise move it down to a new row 
-                    #}
-                    {#{% set meOffset = 0 %}
-                    {% for mevent in events if mevent.startDate.format('Y-m-d') <= start|date_modify(['+', (w + 1), ' week']|join)|date('Y-m-d') and mevent.endDate.format('Y-m-d') >= start|date_modify(['+', w, ' week']|join)|date('Y-m-d') and mevent.isMultiDay %}
-                        {% if loop.index0 == 0 %}
-                            {% if mevent.startDate.format('Y-m-d') > start|date_modify(['+', w, ' week']|join)|date('Y-m-d') %}
-                                {% set meOffset = mevent.startDate.diff(start|date_modify(['+', w, ' week']|join)).days %}
-                            {# else, leave offset at 0 #}
-                            {#{% endif %}
-                        {% else %}
-                            {# 
-                                determine where to place this event, if its start date is after the offset, then place it in same row as the previous event, elsewise move it down to a new row.
-                                Note: to move down a row, place an empty div of the remaining length of the current row 
-                            #}
-                            {#{% if mevent.startDate.format('Y-m-d') < start|date_modify(['+', w, ' week']|join)|date_modify(['+', meOffset, ' day']|join) %}
-                                {# reset the offset for width can be properly calculated #}
-                                {#{% if mevent.startDate.format('Y-m-d') > start|date_modify(['+', w, ' week']|join)|date('Y-m-d') %}
-                                    {% set meOffset = mevent.startDate.diff(start|date_modify(['+', w, ' week']|join)).days %}
-                                {% else %}
-                                    {% set meOffset = 0 %}
-                                {% endif %}
-                            {% else %}
-                                {% set meOffset = mevent.startDate.diff(start|date_modify(['+', w, ' week']|join)).days - meOffset %}
-                            {% endif %}
-                        {% endif %}
-                        {# determine how many days the event covers #}
-                        {#{% if mevent.endDate.format('Y-m-d') > start|date_modify(['+', (w + 1), ' week']|join)|date('Y-m-d') %}
-                            {% set meWidth = date(start|date_modify(['+', (w + 1), ' week']|join)).diff(start|date_modify(['+', w, ' week']|join)).days - meOffset %}
-                        {% else %}
-                            {% set meWidth = mevent.endDate.diff(start|date_modify(['+', w, ' week']|join)).days - meOffset + 1 %}
-                        {% endif %}
-                        {# Display the event #}
-                        {#<div class='multiday-event' style='float: left; width: {{ 14 * (meWidth + 0.1) }}%; margin-left: {{ meOffset * 14 }}%'>
-                            {{ mevent.event|raw }}
-                        </div>
-                        {# set the offset to the end date of the last event #}
-                        {#{% set meOffset = mevent.endDate.diff(start|date_modify(['+', w, ' week']|join)).days %}
-                    {% endfor %}
-                </div>
-            </div>
-            <div class='calendar-week-body'>
-                {% for d in range(w * 7, (w * 7) + 6) %}
-                    <div class='day-body' style='float: left; width:14%; border-style: solid; border-width: 1px; border-color: #cccccc; height: 120px; overflow: hidden'>
-                        <small>{{ start|date_modify(['+', d, ' day']|join)|date('j') }}</small>
-                        {% for event in events if not event.isMultiDay and event.startDate.format('Y-m-d') == start|date_modify(['+', d, ' day']|join)|date('Y-m-d')%}
-                            <div class='calendar-event'>
-                                {{ event.event|raw }}
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    {% endfor %}
-</div> #}
-
 {# Create a table to represent the monthly calendar with the td's being the day and th being the names of the days #}
 <div class='calendar-month'>
     <table class='calendar-month-layout'>
@@ -98,7 +16,7 @@
             {# This creates an empty div that stretches a whole week between the bottom of the date number and the bottom of the day cell #}
             <tr><td colspan='7' class='calendar-multiday-bar'>
                 <div class='calendar-multiday-event-container'>
-                    {% if loop.index0 > 0 or month_start.format('Y-m-d') < start|date_modify('+1 week')|date('Y-m-d') %}
+                    {% if (month_start.format('Y-m-d') < start|date_modify('+1 week')|date('Y-m-d') and month_end.format('Y-m-d') >= start|date_modify(['+', w, ' week']|join)|date('Y-m-d')) %}
                         {# MULTIDAY #}
                         {% for event in events if event.startDate.format('Y-m-d') <= start|date_modify(['+', (w + 1), ' week']|join)|date('Y-m-d') and event.endDate.format('Y-m-d') >= start|date_modify(['+', w, ' week']|join)|date('Y-m-d') and event.isMultiDay %}
                             {% if event.startDate.format('Y-m-d') <= start|date_modify(['+', w, ' week']|join)|date('Y-m-d') %}
@@ -111,9 +29,15 @@
                                 {% set sOffset = event.startDate.diff(start|date_modify(['+', w, ' week']|join)).days %}
                             {% endif %}
                             {% if event.endDate.format('Y-m-d') >= start|date_modify(['+', (w + 1), ' week']|join)|date('Y-m-d') %}
-                                {% set eOffset = 6 %}
+                                {% if start|date_modify(['+', (w + 1), ' week']|join)|date('Y-m-d') <= month_end.format('Y-m-d') %}
+                                    {% set eOffset = 6 %}
+                                {% elseif start|date_modify(['+', w, ' week']|join)|date('Y-m-d') == month_end.format('Y-m-d')%}
+                                    {% set eOffset = 0 %}
+                                {% else %}
+                                    {% set eOffset = month_end.diff(start|date_modify(['+', w, ' week']|join)).days %}
+                                {% endif %}
                             {% else %}
-                                {% set eOffset = event.endDate.diff(start|date_modify(['+', w, ' week']|join)).days  %}
+                                {% set eOffset = event.endDate.diff(start|date_modify(['+', w, ' week']|join)).days %}
                             {% endif %}
                             <div class='calendar-multiday-event' style='top: 0; left: {{ sOffset * 14.3 }}%; width: {{ (eOffset - sOffset + 1) * 14.3 }}%;'>
                                 {{ event.event|raw }}
