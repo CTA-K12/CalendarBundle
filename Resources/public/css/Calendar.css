@@ -282,6 +282,10 @@
         z-index: 1;
     }
 
+    .calendar-single-event {
+        font-size: 60%;
+    }
+
     .calendar-day-week, .calendar-today-week {
         width: 4em;
         height: 17em;
@@ -337,6 +341,10 @@
         height: 25em;
     }
 
+    .calendar-single-event {
+        font-size: 80%;
+    }
+
     .calendar-day-single, .calendar-today-single {
         height: 25em;
     }
@@ -385,6 +393,10 @@
     .calendar-day-week, .calendar-today-week {
         width: 8em;
         height: 35em;
+    }
+
+    .calendar-single-event {
+        font-size: 90%;
     }
 
     .calendar-day-single, .calendar-today-single {
@@ -437,6 +449,10 @@
         height: 60em;
     }
 
+    .calendar-single-event {
+        font-size: 100%;
+    }
+
     .calendar-day-single, .calendar-today-single {
         height: 60em;
     }
@@ -484,6 +500,10 @@
     .calendar-day-week, .calendar-today-week {
         width: 12em;
         height: 72em;
+    }
+
+    .calendar-single-event {
+        font-size: 110%;
     }
 
     .calendar-day-single, .calendar-today-single {
@@ -534,6 +554,10 @@
     .calendar-day-week, .calendar-today-week {
         width: 15em;
         height: 100em;
+    }
+
+    .calendar-single-event {
+        font-size: 130%;
     }
 
     .calendar-day-single, .calendar-today-single {
