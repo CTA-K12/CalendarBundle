@@ -5,18 +5,19 @@ TODO List for the CalendarBundle
 --------------------------------
 
 ### High Priority
-* Move the calendar bundle out of the Hospital Bundle and make it stand alone
+* Change the createEvent function to allow a url as a parameter that can make the default events a link
 * Add functions to the service interface that will be called when a day is clicked or an event is dragged to a new spot
 
 ### Mid Priority
-* Allow a special type of event to rendered that changes the background color of a selection of days3558168orange15!
+* Allow a special type of event to rendered that changes the background color of a selection of days
 
 
 ### Low Priority
-* More Styles!
+* More Styles! *Some styles have been added*
 * Code cleanup
 
 ### Completed Tasks
+* ~~Move the calendar bundle out of the Hospital Bundle and make it stand alone~~ **COMPLETE** Calendar Bundle is now its own thing
 * ~~Remove the styling attributes from the html tags and start a css sheet to put all style content in that (as a result the naming conventions from the mid priorities is now high priority) --- this will help with making the process to make the calendar more adaptive easier~~ **COMPLETE** Styling is now in a Calendar.css file
 * ~~Fix the layout and theming to prevent degradation to an unusable state when the calendar is display on smaller screens~~ **COMPLETE** Calendar is now responsive and has 6 different sizes that it will change to dynamically
 * ~~Fix the day display screen so that it does not look terrible~~ **COMPLETE** Well, atleast complete in terms of why I put this on the todo list, the lack of hourly times still makes the day view look awkward.
