@@ -18,16 +18,17 @@ class CalendarEvent
         $this->calcIsMultiDay();
     }
 
-    public function createEvent($eventString, $bgColor = null, $txtColor = null) {
+    public function createEvent($eventString, $bgColor = null, $txtColor = null, $url = '#') {
         if ($bgColor == null || $txtColor == null) {
-            $this->event = "<div class='calendar-message-box-defaultcolor'>" 
-                . $eventString . "</div>";
+            $this->event = "<a href='" . $url . "' class='calendar-message-box-defaultcolor' 
+            style='display: block;'>" 
+                . $eventString . "</a>";
         }
         else {
-            $this->event = "<div class='calendar-message-box' 
+            $this->event = "<a href='" . $url . "' class='calendar-message-box' 
             style='background-color: " . $bgColor .
-            "; color: " . $txtColor . "'>" . $eventString .
-            "</div>";
+            "; color: " . $txtColor . "; display: block;'>" . $eventString .
+            "</a>";
         }
     }
 
