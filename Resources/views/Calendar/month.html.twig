@@ -39,7 +39,7 @@
                             {% else %}
                                 {% set eOffset = event.endDate.diff(start|date_modify(['+', w, ' week']|join)).days %}
                             {% endif %}
-                            <div class='calendar-multiday-event' style='top: 0; left: {{ sOffset * 14.3 }}%; width: {{ (eOffset - sOffset + 1) * 14.3 }}%;'>
+                            <div class='calendar-multiday-event' style='top: 0; left: {{ sOffset * 14.3 }}%; width: {{ (eOffset - sOffset + 1) * 14.3 }}%;' draggable='true'>
                                 {{ event.event|raw }}
                             </div>
                         {% endfor %}
@@ -61,14 +61,16 @@
                         {% else %}
                             <td class='calendar-day'>
                         {% endif %}
-                            <div class='calendar-day-date'>{{ start|date_modify(['+', d, ' day']|join)|date('j') }}</div>
-                            {# SINGLE DAY EVENT LOOP #}
-                            <div class='calendar-single-event-container'>
-                                {% for event in events if not event.isMultiDay and event.startDate.format('Y-m-d') == start|date_modify(['+', d, ' day']|join)|date('Y-m-d')%}
-                                    <div class='calendar-single-event'>
-                                        {{ event.event|raw }}
-                                    </div>
-                                {% endfor %} 
+                            <div class='calendar-day-items' style='width: 100%; height: 100%' {% for opt in day_opts if opt.date.format('Y-m-d') == start|date_modify(['+', d, ' day']|join)|date('Y-m-d') %} {{ opt.options|raw }} {% endfor %}>
+                                <div class='calendar-day-date'>{{ start|date_modify(['+', d, ' day']|join)|date('j') }}</div>
+                                {# SINGLE DAY EVENT LOOP #}
+                                <div class='calendar-single-event-container'>
+                                    {% for event in events if not event.isMultiDay and event.startDate.format('Y-m-d') == start|date_modify(['+', d, ' day']|join)|date('Y-m-d')%}
+                                        <div class='calendar-single-event'>
+                                            {{ event.event|raw }}
+                                        </div>
+                                    {% endfor %} 
+                                </div>
                             </div>
                         </td>
                     {% endif %}
@@ -78,9 +80,7 @@
         {% endfor %}
         {# END WEEK LOOP #}
     </table>
-    {# START EVENT WEEK LOOP #}
-    {% for w in range(0, 5) %}
-        
-    {% endfor %}
-    {# END EVENT WEEK LOOP #}
+    <script type='test/javascript'>
+        $('.calendar-widget').trigger('calendar-change');
+    </script>
 </div>

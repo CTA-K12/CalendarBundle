@@ -5,7 +5,6 @@ TODO List for the CalendarBundle
 --------------------------------
 
 ### High Priority
-* Change the createEvent function to allow a url as a parameter that can make the default events a link
 * Add functions to the service interface that will be called when a day is clicked or an event is dragged to a new spot
 
 ### Mid Priority
@@ -17,6 +16,7 @@ TODO List for the CalendarBundle
 * Code cleanup
 
 ### Completed Tasks
+* ~~Change the createEvent function to allow a url as a parameter that can make the default events a link~~ **COMPLETE** added ability to add a link via the createEvent function
 * ~~Move the calendar bundle out of the Hospital Bundle and make it stand alone~~ **COMPLETE** Calendar Bundle is now its own thing
 * ~~Remove the styling attributes from the html tags and start a css sheet to put all style content in that (as a result the naming conventions from the mid priorities is now high priority) --- this will help with making the process to make the calendar more adaptive easier~~ **COMPLETE** Styling is now in a Calendar.css file
 * ~~Fix the layout and theming to prevent degradation to an unusable state when the calendar is display on smaller screens~~ **COMPLETE** Calendar is now responsive and has 6 different sizes that it will change to dynamically

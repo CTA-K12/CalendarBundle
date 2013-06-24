@@ -9,16 +9,18 @@ class CalendarEvent
     private $event;
     private $isAllDay;
     private $isMultiDay;
+    private $objRef;
 
-    public function __construct(\DateTime $startDate, \DateTime $endDate)
+    public function __construct(\DateTime $startDate, \DateTime $endDate, $objRef = null)
     {
         $this->startDate = clone $startDate;
         $this->endDate = clone $endDate;
         $this->isAllDay = false;
         $this->calcIsMultiDay();
+        $this->objRef = $objRef;
     }
 
-    public function createEvent($eventString, $bgColor = null, $txtColor = null, $url = '#') {
+    public function createEvent($eventString, $url = '#', $bgColor = null, $txtColor = null) {
         if ($bgColor == null || $txtColor == null) {
             $this->event = "<a href='" . $url . "' class='calendar-message-box-defaultcolor' 
             style='display: block;'>" 
@@ -77,6 +79,14 @@ class CalendarEvent
     public function getIsMultiDay()
     {
         return $this->isMultiDay;
+    }
+
+    public function setObjRef($objRef) {
+        $this->objRef = $objRef;
+    }
+
+    public function getObjRef() {
+        return $this->objRef;
     }
 
     protected function calcIsMultiDay()
