@@ -34,6 +34,15 @@ class CalendarEvent
         }
     }
 
+    public function createClickableDay($url) {
+        if (!$this->isMultiDay) {
+            $this->event = "<a href='" . $url . "' style='position: absolute;
+            width: 100%; height: 100%; top: 0; left: 0; text-decoration: none;
+            z-index: 10; background-color: white; opacity: 0; filter: alpha(opacity=1)
+            ></a>";
+        }
+    }
+
     public function setStartDate(\DateTime $startDate)
     {
         $this->startDate = $startDate;
