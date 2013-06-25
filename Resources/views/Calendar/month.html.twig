@@ -57,11 +57,11 @@
                     {% else %}
                         {# If the day is today, then give it speical theming #}
                         {% if start|date_modify(['+', d, ' day']|join)|date('Y-m-d') == 'now'|date('Y-m-d') %}
-                            <td class='calendar-today'>
+                            <td class='calendar-today' id='calendar-day-{{ start|date_modify(['+', d, ' day']|join)|date('Y-m-d') }}'>
                         {% else %}
-                            <td class='calendar-day'>
+                            <td class='calendar-day' id='calendar-day-{{ start|date_modify(['+', d, ' day']|join)|date('Y-m-d') }}'>
                         {% endif %}
-                            <div class='calendar-day-items' style='width: 100%; height: 100%' {% for opt in day_opts if opt.date.format('Y-m-d') == start|date_modify(['+', d, ' day']|join)|date('Y-m-d') %} {{ opt.options|raw }} {% endfor %}>
+                            <div class='calendar-day-items' id='calendar-day-items-{{ start|date_modify(['+', d, ' day']|join)|date('Y-m-d') }}' style='width: 100%; height: 100%' {% for opt in day_opts if opt.date.format('Y-m-d') == start|date_modify(['+', d, ' day']|join)|date('Y-m-d') %} {{ opt.options|raw }} {% endfor %}>
                                 <div class='calendar-day-date'>{{ start|date_modify(['+', d, ' day']|join)|date('j') }}</div>
                                 {# SINGLE DAY EVENT LOOP #}
                                 <div class='calendar-single-event-container'>

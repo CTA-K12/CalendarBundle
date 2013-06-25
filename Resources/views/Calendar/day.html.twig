@@ -20,11 +20,11 @@
         <tr class='calendar-month-days'>
             {# If the day is today, then give it speical theming #}
             {% if day|date('Y-m-d') == 'now'|date('Y-m-d') %}
-                <td class='calendar-today-single'>
+                <td class='calendar-today-single' id='calendar-day-{{ day|date('Y-m-d') }}'>
             {% else %}
-                <td class='calendar-day-single'>
+                <td class='calendar-day-single' id='calendar-day-{{ day|date('Y-m-d') }}'>
             {% endif %}
-                <div class='calendar-day-items' style='width: 100%; height: 100%' {% for opt in day_opts if opt.date.format('Y-m-d') == day|date('Y-m-d') %} {{ opt.options|raw }} {% endfor %}>
+                <div class='calendar-day-items' style='width: 100%; height: 100%' {% for opt in day_opts if opt.date.format('Y-m-d') == day|date('Y-m-d') %} {{ opt.options|raw }} {% endfor %} id='calendar-day-items-{{ day|date('Y-m-d') }}'>
                     <div class='calendar-day-date'>{{ day|date('j') }}</div>
                     {# SINGLE DAY EVENT LOOP #}
                     <div class='calendar-single-event-container'>

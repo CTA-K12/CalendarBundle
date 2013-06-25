@@ -54,7 +54,7 @@ class ExampleCalendarService
         }
         $exampleMultiDay->createEvent('Multiday Event!');
         $exampleMultiDay2->createEvent('Note: if using raw multiday events, 
-            some theming may not stretch the whole width', 'rgb(199,159,16)', 
+            some theming may not stretch the whole width', '#', 'rgb(199,159,16)', 
             'rgb(255, 255, 255)');
 
         $events = new CalendarEventCollection();
