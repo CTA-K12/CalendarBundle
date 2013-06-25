@@ -16,7 +16,7 @@
             {# This creates an empty div that stretches a whole week between the bottom of the date number and the bottom of the day cell #}
             <tr><td colspan='7' class='calendar-multiday-bar'>
                 <div class='calendar-multiday-event-container'>
-                    {% if (month_start.format('Y-m-d') < start|date_modify('+1 week')|date('Y-m-d') and month_end.format('Y-m-d') >= start|date_modify(['+', w, ' week']|join)|date('Y-m-d')) %}
+                    {% if month_end.format('Y-m-d') >= start|date_modify(['+', w, ' week']|join)|date('Y-m-d') %}
                         {# MULTIDAY #}
                         {% for event in events if event.startDate.format('Y-m-d') <= start|date_modify(['+', (w + 1), ' week']|join)|date('Y-m-d') and event.endDate.format('Y-m-d') >= start|date_modify(['+', w, ' week']|join)|date('Y-m-d') and event.isMultiDay %}
                             {% if event.startDate.format('Y-m-d') <= start|date_modify(['+', w, ' week']|join)|date('Y-m-d') %}
