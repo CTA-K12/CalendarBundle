@@ -23,7 +23,7 @@ class ExampleCalendarService
         $exampleEvent->setIsAllDay(true);
 
         $exampleEvent2 = new CalendarEvent(new \DateTime(), new \DateTime());
-        $exampleEvent2->createEvent('This is today!', 
+        $exampleEvent2->createEvent('This is today!', '#', 
             'rgb(167, 15, 90)', 'rgb(219, 177, 119)');
 
         $tomorrow = new \DateTime();
