@@ -12,7 +12,7 @@ MESD Calendar Bundle currently:
 
 ### What Can't The Calendar Do In This Version?
 MESD Calendar Bundle currently does not support:
-* Draging and Dropping Events
+* Dragging and Dropping Events
 * Having a universal click function for all days (you can add buttons and clickable elements manually, though)
 * Be bugless 
 * Calendar currently only has one out of the box theme
