@@ -302,12 +302,12 @@
 @media only screen and (min-width: 26em) {
     .calendar-widget {
         width: 32em;
-        min-height: 30em;
+        min-height: 20em;
     }
 
     .calendar-month-othermonth-day, .calendar-day, .calendar-today {
         width: 6em;
-        height: 6em;
+        height: 4em;
     }
 
     .calendar-days-header {
@@ -356,12 +356,12 @@
 @media only screen and (min-width: 38em) {
     .calendar-widget {
         width: 48em;
-        min-height: 45em;
+        min-height: 30em;
     }
 
     .calendar-month-othermonth-day, .calendar-day, .calendar-today {
         width: 8em;
-        height: 7em;
+        height: 5em;
     }
 
     .calendar-days-header {
@@ -409,13 +409,13 @@
 /* Desktop */
 @media only screen and (min-width: 60em) {
     .calendar-widget {
-        width: 75em;
-        min-height: 70em;
+        width: 70em;
+        min-height: 40em;
     }
 
     .calendar-month-othermonth-day, .calendar-day, .calendar-today {
         width: 10em;
-        height: 10em;
+        height: 7em;
     }
 
     .calendar-days-header {
@@ -464,12 +464,12 @@
 @media only screen and (min-width: 85em) {
     .calendar-widget {
         width: 91em;
-        min-height: 84em;
+        min-height: 50em;
     }
 
     .calendar-month-othermonth-day, .calendar-day, .calendar-today {
         width: 12em;
-        height: 12em;
+        height: 7em;
     }
 
     .calendar-days-header {
@@ -517,12 +517,12 @@
 @media only screen and (min-width: 120em) {
     .calendar-widget {
         width: 120em;
-        min-height: 112em;
+        min-height: 60em;
     }
 
     .calendar-month-othermonth-day, .calendar-day, .calendar-today {
         width: 15em;
-        height: 15em;
+        height: 9em;
     }
 
     .calendar-days-header {
