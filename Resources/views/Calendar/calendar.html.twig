@@ -51,3 +51,8 @@
         {% render url('calendar_display_day', {'calendarService': calendar_service, 'params': params, 'scope': 'Day', 'timestamp': time.timestamp}) %}
     {% endif %}
 </div>
+
+<div id='calendar-info-service' style='display: none;'>{{ calendar_service }}</div>
+<div id='calendar-info-params' style='display: none;'>{{ params }}</div>
+<div id='calendar-info-scope' style='display: none;'>{{ scope }}</div>
+<div id='calendar-info-time' style='display: none;'>{{ time.timestamp }}</div>
