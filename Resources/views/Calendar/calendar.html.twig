@@ -41,7 +41,7 @@
         <a class='btn calendar-button' href='#' onClick="$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['+1 ', scope]|join)|date('U')}) }}');">&gt;</a>
         <a href='#' class='btn calendar-button' onClick="$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['+1 ', superscope]|join)|date('U')}) }}');">&raquo;</a>
     </span>
-</div>
+</div><br />
 <div class='calendar-display'>
     {% if scope == 'Month' %}
         {% render url('calendar_display_month', {'calendarService': calendar_service, 'params': params, 'scope': 'Month', 'timestamp': time.timestamp}) %}
