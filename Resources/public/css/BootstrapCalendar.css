@@ -116,7 +116,7 @@
 
 .calendar-days-header th {
     line-height: 1.5;
-}
+} 
 
 .calendar-day, .calendar-today, .calendar-day-week, .calendar-today-week, 
 .calendar-day-single, .calendar-today-single {
@@ -231,6 +231,7 @@
 .calendar-widget {
     width: 100%;
     height: 100%;
+    min-width: 500px;
 }
 
 .calendar-control-bar {
@@ -261,11 +262,10 @@
 
 .calendar-month-days {
     width: 100%;
-    height: 7em;
 }
 
 .calendar-month-othermonth-day, .calendar-day, .calendar-today {
-    height: 100%;
+    height: 60px;
 }
 
 .calendar-month-layout {
@@ -310,6 +310,3 @@
 
 }
 
-.calendar-day-single, .calendar-today-single {
-    height: 3em;
-}
