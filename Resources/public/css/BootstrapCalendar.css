@@ -235,13 +235,13 @@
 
 .calendar-control-bar {
     width: 100%;
-    height: 8%;
+    height: 6%;
     overflow: hidden;
 }
 
 .calendar-display {
     width: 100%;
-    height: 92%;
+    height: 94%;
 }
 
 .calendar-month {
@@ -265,7 +265,7 @@
 }
 
 .calendar-month-othermonth-day, .calendar-day, .calendar-today {
-    
+    height: 100%;
 }
 
 .calendar-month-layout {
@@ -311,5 +311,5 @@
 }
 
 .calendar-day-single, .calendar-today-single {
-    height: 7em;
+    height: 3em;
 }
