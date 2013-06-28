@@ -307,6 +307,10 @@
 }
 
 .calendar-day-week, .calendar-today-week {
+    height: 400px;
+}
 
+.calendar-day-single, .calendar-today-single {
+    height: 400px;
 }
 
