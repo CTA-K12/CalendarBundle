@@ -90,6 +90,13 @@ class CalendarEvent
         return $this->isMultiDay;
     }
 
+    //This will override the multiday calculation in createEvent,
+    //**BUT** if the dates change **THIS VALUE WILL BE OVERWRITTEN**
+    public function setIsMultiDay($isMultiDay) 
+    {
+        $this->isMultiDay = $isMultiDay;
+    }
+
     public function setObjRef($objRef) {
         $this->objRef = $objRef;
     }
