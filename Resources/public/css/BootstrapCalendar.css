@@ -188,9 +188,7 @@
 }
 
 .calendar-single-event-container {
-    margin: 1px;
-    margin-top: 6px;
-    overflow: hidden;
+
 }
 
 .calendar-single-event, .calendar-multiday-event {
