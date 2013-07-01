@@ -188,7 +188,7 @@
 }
 
 .calendar-single-event-container {
-
+    min-height: 60px;
 }
 
 .calendar-single-event, .calendar-multiday-event {
@@ -262,7 +262,7 @@
     width: 100%;
 }
 
-.calendar-month-othermonth-day, .calendar-day, .calendar-today {
+.calendar-month-othermonth-day {
     height: 60px;
 }
 
