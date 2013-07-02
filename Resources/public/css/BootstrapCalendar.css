@@ -40,22 +40,28 @@
     cursor: default;
     color: #ffffff;
     opacity: 0.7;
-    background-color: #0044cc;
-    background-image: linear-gradient(#0088cc, #0044cc);
     border: 1px #0044cc;
     text-shadow: 0 0 0;
 }
 
 .calendar-button-disabled:hover {
     cursor: default;
-    background-color: #0044cc;
 }
 
-.calendar-button:hover {
+.calendar-button:hover, .calendar-button-disabled:hover {
     text-shadow: 0 0 0;
     color: #ffffff;
     background-color: #0044cc;
     background-image: linear-gradient(#0044cc, #0044cc);
+}
+
+.calendar-button:active, .calendar-button-disabled:active,
+.calendar-button:focus, .calendar-button-disabled:focus  {
+    color: #ffffff;
+    background-color: #0044cc;
+    background-image: linear-gradient(#0088cc, #0044cc);
+    border: 1px #0044cc;
+    text-shadow: 0 0 0;
 }
 
 /* Text for the current time period */
@@ -165,8 +171,12 @@
 .calendar-day:focus,
 .calendar-today:hover,
 .calendar-today:focus, 
+.calendar-day-week:hover,
+.calendar-day-week:focus, 
 .calendar-today-week:hover,
 .calendar-today-week:focus, 
+.calendar-day-single:hover,
+.calendar-day-single:focus,
 .calendar-today-single:hover,
 .calendar-today-single:focus {
     background-image: linear-gradient(#d9edf7, #d9edf7);
@@ -223,7 +233,7 @@
 }
 
 .calendar-multiday-event-week {
-    max-height: 4%;
+    min-height: 10px;
 }
 
 .calendar-widget {
