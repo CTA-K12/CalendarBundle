@@ -12,8 +12,10 @@
         </tr>
         {# MULTIDAY EVENT LOOP #}
         {# This creates an empty div that stretches a whole week between the bottom of the date number and the bottom of the day cell #}
+        {% set offsetArray = [] %}
         <tr><td colspan='7' class='calendar-multiday-bar'>
             <div class='calendar-multiday-event-container'>
+                {% set maxLine = -1 %}
                 {# MULTIDAY #}
                 {% for event in events if event.startDate.format('Y-m-d') <= end|date('Y-m-d') and event.endDate.format('Y-m-d') >= start|date('Y-m-d') and event.isMultiDay %}
                     {% if event.startDate.format('Y-m-d') <= start|date('Y-m-d') %}
@@ -26,11 +28,26 @@
                     {% else %}
                         {% set eOffset = event.endDate.diff(start).days  %}
                     {% endif %}
-                    <div class='calendar-multiday-event-week' style='top: 0; left: {{ sOffset * 14.3 }}%; width: {{ (eOffset - sOffset + 1) * 14.3 }}%;'>
+                    {# Now, look through the offsetArray for the firt 'line' in which this event can be placed #}
+                    {% set currentLine = 0 %}
+                    {% set break = false %}
+                    {% for line in offsetArray|keys %}
+                        {% if break != true %}
+                            {% if sOffset >= offsetArray[line] %}
+                                {% set break = true %}
+                            {% else %}
+                                {% set currentLine = currentLine + 1 %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% set offsetArray = offsetArray|merge({(currentLine): eOffset}) %}
+                    {% if currentLine > maxLine %}{% set maxLine = currentLine %}{% endif %}
+                    <div class='calendar-multiday-event-week' style='top: {{ currentLine * 1.6 }}em; left: {{ sOffset * 14.3 }}%; width: {{ (eOffset - sOffset + 1) * 14.3 }}%;'>
                         {{ event.event|raw }}
                     </div>
                 {% endfor %}
                 {# END MULTIDAY EVENT LOOP #}
+                <div class='calendar-multiday-info' style='display: none;'>{{ maxLine + 1 }}</div>
             </div>
         </td></tr>
         <tr class='calendar-month-days'>

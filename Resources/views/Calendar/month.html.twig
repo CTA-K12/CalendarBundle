@@ -14,11 +14,14 @@
         {% for w in range(0, 5) %}
         {# MULTIDAY EVENT LOOP #}
             {# This creates an empty div that stretches a whole week between the bottom of the date number and the bottom of the day cell #}
+            {% set offsetArray = [] %}
             <tr><td colspan='7' class='calendar-multiday-bar'>
                 <div class='calendar-multiday-event-container'>
+                    {% set maxLine = -1 %}
                     {% if month_end.format('Y-m-d') >= start|date_modify(['+', w, ' week']|join)|date('Y-m-d') %}
                         {# MULTIDAY #}
-                        {% for event in events if event.startDate.format('Y-m-d') <= start|date_modify(['+', (w + 1), ' week']|join)|date('Y-m-d') and event.endDate.format('Y-m-d') >= start|date_modify(['+', w, ' week']|join)|date('Y-m-d') and event.isMultiDay %}
+                        {% for event in events if event.startDate.format('Y-m-d') < start|date_modify(['+', (w + 1), ' week']|join)|date('Y-m-d') and event.endDate.format('Y-m-d') >= start|date_modify(['+', w, ' week']|join)|date('Y-m-d') and event.isMultiDay %}
+                            {# Determine where this event starts in the scope of the current week #}
                             {% if event.startDate.format('Y-m-d') <= start|date_modify(['+', w, ' week']|join)|date('Y-m-d') %}
                                 {% if w > 0 %}
                                     {% set sOffset = 0 %}
@@ -28,7 +31,19 @@
                             {% else %}
                                 {% set sOffset = event.startDate.diff(start|date_modify(['+', w, ' week']|join)).days %}
                             {% endif %}
-                            {% if event.endDate.format('Y-m-d') >= start|date_modify(['+', (w + 1), ' week']|join)|date('Y-m-d') %}
+                            {# Now, look through the offsetArray for the firt 'line' in which this event can be placed #}
+                            {% set currentLine = 0 %}
+                            {% set break = false %}
+                            {% for line in offsetArray|keys %}
+                                {% if break != true %}
+                                    {% if sOffset >= offsetArray[line] %}
+                                        {% set break = true %}
+                                    {% else %}
+                                        {% set currentLine = currentLine + 1 %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if event.endDate.format('Y-m-d') >= start|date_modify(['+', (w + 1), ' week']|join)|date('Y-m-d') or (start|date_modify(['+', (w + 1), ' week']|join)|date('Y-m-d') > month_end.format('Y-m-d') and event.endDate.format('Y-m-d') >= month_end.format('Y-m-d')) %}
                                 {% if start|date_modify(['+', (w + 1), ' week']|join)|date('Y-m-d') <= month_end.format('Y-m-d') %}
                                     {% set eOffset = 6 %}
                                 {% elseif start|date_modify(['+', w, ' week']|join)|date('Y-m-d') == month_end.format('Y-m-d')%}
@@ -39,12 +54,14 @@
                             {% else %}
                                 {% set eOffset = event.endDate.diff(start|date_modify(['+', w, ' week']|join)).days %}
                             {% endif %}
-                            <div class='calendar-multiday-event' style='top: 0; left: {{ sOffset * 14.3 }}%; width: {{ (eOffset - sOffset + 1) * 14.3 }}%;' draggable='true'>
+                            {% set offsetArray = offsetArray|merge({(currentLine): eOffset}) %}
+                            {% if currentLine > maxLine %}{% set maxLine = currentLine %}{% endif %}
+                            <div class='calendar-multiday-event' style='top: {{ currentLine * 1.6 }}em; left: {{ sOffset * 14.3 }}%; width: {{ (eOffset - sOffset + 1) * 14.3 }}%;' draggable='true'>
                                 {{ event.event|raw }}
                             </div>
-                        {% endfor %}
-                        {# END MULTIDAY EVENT LOOP #}
+                        {% endfor %}                    {# END MULTIDAY EVENT LOOP #}
                     {% endif %}
+                    <div class='calendar-multiday-info' style='display: none;'>{{ maxLine + 1 }}</div>
                 </div>
             </td></tr>
             <tr class='calendar-month-days'>
@@ -80,7 +97,7 @@
         {% endfor %}
         {# END WEEK LOOP #}
     </table>
-    <script type='test/javascript'>
+    <script>
         $('.calendar-widget').trigger('calendar-change');
     </script>
 </div>

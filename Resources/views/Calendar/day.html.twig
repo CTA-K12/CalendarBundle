@@ -9,12 +9,15 @@
         <tr><td class='calendar-multiday-bar'>
             <div class='calendar-multiday-event-container'>
                 {# MULTIDAY #}
+                {% set maxLine = -1 %}
                 {% for event in events if event.startDate.format('Y-m-d') <= day|date('Y-m-d') and event.endDate.format('Y-m-d') >= day|date('Y-m-d') and event.isMultiDay %}
-                    <div class='calendar-multiday-event-week'>
+                    {% set maxLine = maxLine + 1 %}
+                    <div class='calendar-multiday-event-week' style='width: 100%; top: {{ maxLine * 1.7 }}em;'>
                         {{ event.event|raw }}
                     </div>
                 {% endfor %}
                 {# END MULTIDAY EVENT LOOP #}
+                <div class='calendar-multiday-info' style='display: none;'>{{ maxLine + 1 }}</div>
             </div>
         </td></tr>
         <tr class='calendar-month-days'>
