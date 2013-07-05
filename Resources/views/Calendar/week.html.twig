@@ -76,6 +76,11 @@
         </tr>
     </table>
     <script>
-        $('.calendar-widget').trigger('calendar-change');
+        try {
+            $('.calendar-widget').trigger('calendar-change');
+        }
+        catch(err) {
+            
+        }
     </script>
 </div>
