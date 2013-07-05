@@ -228,10 +228,6 @@
 
 
 /*sizing*/
-.calendar-multiday-event {
-    max-height: 2%;
-}
-
 .calendar-multiday-event-week {
     min-height: 10px;
 }
@@ -300,7 +296,8 @@
 }
 
 .calendar-multiday-event {
-    max-height: 2%;
+    height: 1.7em;
+    overflow-y: hidden;
 }
 
 .calendar-date {
