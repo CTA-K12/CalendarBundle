@@ -55,7 +55,6 @@
 <script type='text/javascript'>
     window.onload = function() {
         $('.calendar-widget').on('calendar-change', function() {
-            console.log('Calendar Change!');
             $('.calendar-multiday-event-container').each(function() {
                 $(this).height(($(this).children('.calendar-multiday-info').text() * 1.7) + 'em');
             });
