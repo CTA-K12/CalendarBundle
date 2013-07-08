@@ -61,7 +61,6 @@ class CalendarController extends Controller
             array(
                 'day' => $startDate,
                 'events' => $events->getEvents(),
-                'day_opts' => $events->getDayOptions(),
         ));
     }
 
@@ -83,7 +82,6 @@ class CalendarController extends Controller
                 'end' => $endDate,
                 'today' => new \DateTime(),
                 'events' => $events->getEvents(),
-                'day_opts' => $events->getDayOptions(),
         ));
     }
 
@@ -113,7 +111,6 @@ class CalendarController extends Controller
                 'today' => new \DateTime(),
                 'events' => $events->getEvents(),
                 'current' => $timestamp,
-                'day_opts' => $events->getDayOptions(),
         ));
     }
 }
