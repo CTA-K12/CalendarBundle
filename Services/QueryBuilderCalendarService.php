@@ -83,7 +83,7 @@ class QueryBuilderCalendarService
             //Now look through the methods for getDate methods
             $isMultiDay = false;
             foreach ($methods as $method) {
-                if (preg_match('/^get.*$StartDate$/', $method)) {
+                if (preg_match('/^get.*?StartDate$/', $method)) {
                     $this->getDateMethod = $method;
                     $this->isMultiDay = true;
                 }
