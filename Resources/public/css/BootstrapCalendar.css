@@ -153,8 +153,8 @@
 }
 
 .calendar-today, .calendar-today-week, .calendar-today-single {
-    color: #468847;
-    background-image: linear-gradient(#dff0d8, #dff0d8);
+    color: #333333;
+    background-image: linear-gradient(#f2f2f2, #f2f2f2);
 }
 
 .calendar-month-othermonth-day {
