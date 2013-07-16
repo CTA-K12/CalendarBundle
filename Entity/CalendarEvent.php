@@ -20,17 +20,25 @@ class CalendarEvent
         $this->objRef = $objRef;
     }
 
-    public function createEvent($eventString, $url = '#', $bgColor = null, $txtColor = null) {
+    public function createEvent($eventString, $url = '#', $bgColor = null, $txtColor = null, $borderColor = null) {
         if ($bgColor == null || $txtColor == null) {
             $this->event = "<a href='" . $url . "' class='calendar-message-box-defaultcolor' 
             style='display: block;'>" 
                 . $eventString . "</a>";
         }
         else {
-            $this->event = "<a href='" . $url . "' class='calendar-message-box' 
-            style='background-color: " . $bgColor .
-            "; color: " . $txtColor . "; display: block;'>" . $eventString .
-            "</a>";
+            if ($borderColor == null) {
+                $this->event = "<a href='" . $url . "' class='calendar-message-box' 
+                style='background-color: " . $bgColor .
+                "; color: " . $txtColor . "; display: block;'>" . $eventString .
+                "</a>";
+            }
+            else {
+                $this->event = "<a href='" . $url . "' class='calendar-message-box' 
+                style='background-color: " . $bgColor .
+                "; color: " . $txtColor . "; display: block; border-style:solid; border-color: " . $borderColor
+                . ";'>" . $eventString . "</a>";
+            }
         }
     }
 
