@@ -20,21 +20,21 @@ class CalendarEvent
         $this->objRef = $objRef;
     }
 
-    public function createEvent($eventString, $url = '#', $bgColor = null, $txtColor = null, $borderColor = null) {
+    public function createEvent($eventString, $url = '#', $bgColor = null, $txtColor = null, $borderColor = null, $class = ' ') {
         if ($bgColor == null || $txtColor == null) {
-            $this->event = "<a href='" . $url . "' class='calendar-message-box-defaultcolor' 
+            $this->event = "<a href='" . $url . "' class='calendar-message-box-defaultcolor " . $class . "' 
             style='display: block;'>" 
                 . $eventString . "</a>";
         }
         else {
             if ($borderColor == null) {
-                $this->event = "<a href='" . $url . "' class='calendar-message-box' 
+                $this->event = "<a href='" . $url . "' class='calendar-message-box " . $class . "'  
                 style='background-color: " . $bgColor .
                 "; color: " . $txtColor . "; display: block;'>" . $eventString .
                 "</a>";
             }
             else {
-                $this->event = "<a href='" . $url . "' class='calendar-message-box' 
+                $this->event = "<a href='" . $url . "' class='calendar-message-box " . $class . "'
                 style='background-color: " . $bgColor .
                 "; color: " . $txtColor . "; display: block; border-style:solid; border-color: " . $borderColor
                 . ";'>" . $eventString . "</a>";
