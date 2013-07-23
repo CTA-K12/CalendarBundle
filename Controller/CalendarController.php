@@ -89,8 +89,10 @@ class CalendarController extends Controller
     {
         $monthStart = new \DateTime();
         $monthStart->setTimestamp(strtotime('first day of this month', $timestamp));
+        $monthStart->setTime(0, 0, 0);
         $monthEnd = new \DateTime();
         $monthEnd->setTimestamp(strtotime('last day of this month', $timestamp));
+        $monthEnd->setTime(23, 59, 59);
         $startDate = new \DateTime();
         $startDate->setTimestamp(strtotime('last Sunday', $monthStart->getTimestamp()));
         $startDate->setTime(0, 0, 0);
