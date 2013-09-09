@@ -1,3 +1,3 @@
 function calendarButtonClick() {
-    $('.calendar-widget').trigger('calendar-change');
+    //$('.calendar-widget').trigger('calendar-change');
 }
