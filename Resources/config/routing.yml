@@ -1,7 +1,3 @@
-mesd_presentation_calendar_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: MESDPresentationCalendarBundle:Default:index }
-
 MESDPresentationCalendarBundle_calendar:
     resource: "@MESDPresentationCalendarBundle/Resources/config/routing/calendar.yml"
     prefix:   /calendar
