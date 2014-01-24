@@ -20,7 +20,10 @@ class CalendarEventCollection
             {
                 if ($a->getStartDate() == $b->getStartDate()) 
                     {
-                        return 0;
+                        if ($a->getGroupId() == $b->getGroupId()) {
+                            return 0;
+                        }
+                        return ($a->getGroupId() < $b->getGroupId()) ? -1 : 1;
                     } 
                 return ($a->getStartDate() < $b->getStartDate()) ? -1 : 1;});
         return $this->events->getArrayCopy();

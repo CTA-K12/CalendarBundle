@@ -10,14 +10,16 @@ class CalendarEvent
     private $isAllDay;
     private $isMultiDay;
     private $objRef;
+    private $groupId;
 
-    public function __construct(\DateTime $startDate, \DateTime $endDate, $objRef = null)
+    public function __construct(\DateTime $startDate, \DateTime $endDate, $objRef = null, $groupId = 0)
     {
         $this->startDate = clone $startDate;
         $this->endDate = clone $endDate;
         $this->isAllDay = false;
         $this->calcIsMultiDay();
         $this->objRef = $objRef;
+        $this->groupId = $groupId;
     }
 
     public function createEvent($eventString, $url = '#', $bgColor = null, $txtColor = null, $borderColor = null, $class = ' ') {
@@ -96,6 +98,14 @@ class CalendarEvent
     public function getIsMultiDay()
     {
         return $this->isMultiDay;
+    }
+
+    public function getGroupId() {
+        return $this->groupId;
+    }
+
+    public function setGroupId($groupId) {
+        $this->groupId = $groupId;
     }
 
     //This will override the multiday calculation in createEvent,
