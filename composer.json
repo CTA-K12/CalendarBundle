@@ -4,7 +4,7 @@
     "type": "symfony-bundle",
     "description": "Calendar Bundle",
     "autoload": {
-        "psr-0": { "MESD\\CalendarBundle": "" }
+        "psr-0": { "Mesd\\CalendarBundle": "" }
     },
-    "target-dir": "MESD/CalendarBundle"
+    "target-dir": "Mesd/CalendarBundle"
 }
