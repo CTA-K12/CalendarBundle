@@ -1,8 +1,8 @@
 <?php
 
-namespace MESD\Presentation\CalendarBundle\Interfaces;
+namespace Mesd\CalendarBundle\Interfaces;
 
-interface CalendarServiceInterface 
+interface CalendarServiceInterface
 {
     /*
      * This event should be called by the calendar controller (any class implementing

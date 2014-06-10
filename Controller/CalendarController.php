@@ -1,22 +1,22 @@
 <?php
 
-namespace MESD\Presentation\CalendarBundle\Controller;
+namespace Mesd\CalendarBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class CalendarController extends Controller 
+class CalendarController extends Controller
 {
     /*
      *  Display Calendar Action
      *  This action takes in the name for the service from where the
      *  calendar will draw its events from, and the parameters that will
-     *  be passed to that service.  It doesn't do anything directly with 
+     *  be passed to that service.  It doesn't do anything directly with
      *  those parameters, but this function is used to serve as a gateway
      *  to pass those parameters to the other display functions.  It also
      *  sets the scope (day, week, month, etc) (default is month) and the
      *  starting timestamp (the current time).
      */
-    public function displayCalendarAction($calendarService, $params = 'null', $scope = 'Month', $timestamp = null) 
+    public function displayCalendarAction($calendarService, $params = 'null', $scope = 'Month', $timestamp = null)
     {
         if ($timestamp == null) {
             $originTime = new \DateTime();
@@ -26,7 +26,7 @@ class CalendarController extends Controller
             $originTime->setTimestamp($timestamp);
         }
 
-        return $this->render('MESDPresentationCalendarBundle:Calendar:calendar.html.twig',
+        return $this->render('MesdCalendarBundle:Calendar:calendar.html.twig',
             array(
                 'time' => $originTime,
                 'scope' => $scope,
@@ -57,7 +57,7 @@ class CalendarController extends Controller
         $service = $this->get($calendarService);
         $events = $service->getEvents($startDate, $endDate, $params);
 
-        return $this->render('MESDPresentationCalendarBundle:Calendar:day.html.twig', 
+        return $this->render('MesdCalendarBundle:Calendar:day.html.twig',
             array(
                 'day' => $startDate,
                 'events' => $events->getEvents(),
@@ -76,7 +76,7 @@ class CalendarController extends Controller
         $service = $this->get($calendarService);
         $events = $service->getEvents($startDate, $endDate, $params);
 
-        return $this->render('MESDPresentationCalendarBundle:Calendar:week.html.twig',
+        return $this->render('MesdCalendarBundle:Calendar:week.html.twig',
             array(
                 'start' => $startDate,
                 'end' => $endDate,
@@ -104,7 +104,7 @@ class CalendarController extends Controller
         $service = $this->get($calendarService);
         $events = $service->getEvents($monthStart, $monthEnd, $params);
 
-        return $this->render('MESDPresentationCalendarBundle:Calendar:month.html.twig',
+        return $this->render('MesdCalendarBundle:Calendar:month.html.twig',
             array(
                 'month_start' => $monthStart,
                 'month_end' => $monthEnd,

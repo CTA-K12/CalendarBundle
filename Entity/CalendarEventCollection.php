@@ -1,8 +1,8 @@
 <?php
 
-namespace MESD\Presentation\CalendarBundle\Entity;
+namespace Mesd\CalendarBundle\Entity;
 
-use MESD\Presentation\CalendarBundle\Entity\CalendarEvent;
+use Mesd\CalendarBundle\Entity\CalendarEvent;
 
 class CalendarEventCollection
 {
@@ -18,18 +18,18 @@ class CalendarEventCollection
         $this->events->uasort(
             function($a, $b)
             {
-                if ($a->getStartDate() == $b->getStartDate()) 
+                if ($a->getStartDate() == $b->getStartDate())
                     {
                         if ($a->getGroupId() == $b->getGroupId()) {
                             return 0;
                         }
                         return ($a->getGroupId() < $b->getGroupId()) ? -1 : 1;
-                    } 
+                    }
                 return ($a->getStartDate() < $b->getStartDate()) ? -1 : 1;});
         return $this->events->getArrayCopy();
     }
 
-    public function addEvent(CalendarEvent $event) 
+    public function addEvent(CalendarEvent $event)
     {
         $this->events->append($event);
     }

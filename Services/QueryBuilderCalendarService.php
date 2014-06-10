@@ -1,10 +1,10 @@
 <?php
 
-namespace MESD\Presentation\CalendarBundle\Services;
+namespace Mesd\CalendarBundle\Services;
 
-use MESD\Presentation\CalendarBundle\Interfaces\CalendarServiceInterface;
-use MESD\Presentation\CalendarBundle\Entity\CalendarEvent;
-use MESD\Presentation\CalendarBundle\Entity\CalendarEventCollection;
+use Mesd\CalendarBundle\Interfaces\CalendarServiceInterface;
+use Mesd\CalendarBundle\Entity\CalendarEvent;
+use Mesd\CalendarBundle\Entity\CalendarEventCollection;
 
 class QueryBuilderCalendarService
 {
@@ -17,7 +17,7 @@ class QueryBuilderCalendarService
     private $colorIndex;
     private $isMultiDay;
 
-    public function __construct($em, $getDateMethod = null, $getEndDateMethod = null, $toStringMethod = null, 
+    public function __construct($em, $getDateMethod = null, $getEndDateMethod = null, $toStringMethod = null,
         $getUrlMethod = null, $colorsArray = null)
     {
         $this->em = $em;
@@ -58,7 +58,7 @@ class QueryBuilderCalendarService
 
     public function getEvents(\DateTime $startDate, \DateTime $endDate, $params)
     {
-        //First build the QueryBuilder from the params variable and check its validity 
+        //First build the QueryBuilder from the params variable and check its validity
         //AND CHECK THAT IT IS A SELECT STATEMENT!!!
         $query = $this->em->createQuery($params);
         if ($query->contains('update') || $query->contains('delete') || $query->contains('insert')) {
@@ -149,14 +149,14 @@ class QueryBuilderCalendarService
                 $event->createEvent(call_user_func(array($obj, $this->toStringMethod)), $url);
             }
             else {
-                $event->createEvent(call_user_func(array($obj, $this->toStringMethod)), $url, 
+                $event->createEvent(call_user_func(array($obj, $this->toStringMethod)), $url,
                     $this->colorsArray[$this->colorIndex][0], $this->colorsArray[$this->colorIndex][1]);
                 $this->colorIndex = ($this->colorIndex + 1) % count($this->colorsArray);
             }
-            
+
             $events->addEvent($event);
         }
-        
+
         return $events;
     }
 }

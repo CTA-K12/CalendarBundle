@@ -1,8 +1,8 @@
 <?php
 
-namespace MESD\Presentation\CalendarBundle\Entity;
+namespace Mesd\CalendarBundle\Entity;
 
-class CalendarEvent 
+class CalendarEvent
 {
     private $startDate;
     private $endDate;
@@ -24,13 +24,13 @@ class CalendarEvent
 
     public function createEvent($eventString, $url = '#', $bgColor = null, $txtColor = null, $borderColor = null, $class = ' ') {
         if ($bgColor == null || $txtColor == null) {
-            $this->event = "<a href='" . $url . "' class='calendar-message-box-defaultcolor " . $class . "' 
-            style='display: block;'>" 
+            $this->event = "<a href='" . $url . "' class='calendar-message-box-defaultcolor " . $class . "'
+            style='display: block;'>"
                 . $eventString . "</a>";
         }
         else {
             if ($borderColor == null) {
-                $this->event = "<a href='" . $url . "' class='calendar-message-box " . $class . "'  
+                $this->event = "<a href='" . $url . "' class='calendar-message-box " . $class . "'
                 style='background-color: " . $bgColor .
                 "; color: " . $txtColor . "; display: block;'>" . $eventString .
                 "</a>";
@@ -110,7 +110,7 @@ class CalendarEvent
 
     //This will override the multiday calculation in createEvent,
     //**BUT** if the dates change **THIS VALUE WILL BE OVERWRITTEN**
-    public function setIsMultiDay($isMultiDay) 
+    public function setIsMultiDay($isMultiDay)
     {
         $this->isMultiDay = $isMultiDay;
     }
@@ -130,7 +130,7 @@ class CalendarEvent
         {
             $this->isMultiDay = true;
         }
-        else 
+        else
         {
             $this->isMultiDay = false;
         }

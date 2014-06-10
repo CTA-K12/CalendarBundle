@@ -1,10 +1,10 @@
 <?php
 
-namespace MESD\Presentation\CalendarBundle\Services;
+namespace Mesd\CalendarBundle\Services;
 
-use MESD\Presentation\CalendarBundle\Interfaces\CalendarServiceInterface;
-use MESD\Presentation\CalendarBundle\Entity\CalendarEvent;
-use MESD\Presentation\CalendarBundle\Entity\CalendarEventCollection;
+use Mesd\CalendarBundle\Interfaces\CalendarServiceInterface;
+use Mesd\CalendarBundle\Entity\CalendarEvent;
+use Mesd\CalendarBundle\Entity\CalendarEventCollection;
 
 class ExampleCalendarService
 {
@@ -23,7 +23,7 @@ class ExampleCalendarService
         $exampleEvent->setIsAllDay(true);
 
         $exampleEvent2 = new CalendarEvent(new \DateTime(), new \DateTime());
-        $exampleEvent2->createEvent('This is today!', '#', 
+        $exampleEvent2->createEvent('This is today!', '#',
             'rgb(167, 15, 90)', 'rgb(219, 177, 119)');
 
         $tomorrow = new \DateTime();
@@ -53,8 +53,8 @@ class ExampleCalendarService
             $exampleMultiDay2 = new CalendarEvent(new \DateTime(), $endDate);
         }
         $exampleMultiDay->createEvent('Multiday Event!');
-        $exampleMultiDay2->createEvent('Note: if using raw multiday events, 
-            some theming may not stretch the whole width', '#', 'rgb(199,159,16)', 
+        $exampleMultiDay2->createEvent('Note: if using raw multiday events,
+            some theming may not stretch the whole width', '#', 'rgb(199,159,16)',
             'rgb(255, 255, 255)');
 
         $events = new CalendarEventCollection();

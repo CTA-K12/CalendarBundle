@@ -1,5 +1,5 @@
 parameters:
-#    mesd_calendar_calendar.example.class: MESD\Presentation\CalendarBundle\Example
+#    mesd_calendar_calendar.example.class: Mesd\CalendarBundle\Example
 
 services:
 #    mesd_calendar_calendar.example:
