@@ -59,15 +59,14 @@
 
 /* Text for the current time period */
 .calendar-date {
-    /*font-size: 300%;*/
+    font-size: 300%;
     font-weight: 700;
-    margin-top: 0px;
 }
 
 /* Middle section div for the calendar-date text */
 .calendar-date-display {
-/*    width: 33%;
-    float: left;*/
+    /*width: 33%;*/
+    float: left;
 }
 
 /* The container that holds the acutal calendar display under the controls */
@@ -291,9 +290,9 @@
 
 /* Button groups, one for scope and one for range */
 .calendar-button-group {
+/*    width: 33%;*/
     padding-top: 2%;
-/*    width: 33%;
-    float:left;*/
+    float:left;
 }
 
 .calendar-day-week, .calendar-today-week {
