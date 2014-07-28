@@ -1,65 +1,71 @@
 {# btn-group is a class in the twitter bootstrap, so this might not look all that great without it, but you can always have your own css sheet that has a class btn-group to make this appear as you want #}
 <script src='{{ asset('bundles/mesdpresentationcalendar/js/Calendar.js') }}'></script>
-<div class='calendar-control-bar'>
-    <span class='btn-group calendar-button-group'>
+<div class="calendar-control-bar row">
+    <div class="col-sm-4-12 text-center">
+        <div class="btn-group calendar-button-group">
+            {% if scope == 'Month' %}
+                <a id="button-scope-month" href='#' class="btn btn-default disabled">Month</a>
+            {% else %}
+                <a id="button-scope-month" class="btn btn-default" href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': 'Month', 'timestamp': time.timestamp}) }}', null, calendarButtonClick);">Month</a>
+            {% endif %}
+            {% if scope == 'Week' %}
+                <a id="button-scope-week" href='#' class="btn btn-default disabled">Week</a>
+            {% else %}
+                <a id="button-scope-week" class="btn btn-default" href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': 'Week', 'timestamp': time.timestamp}) }}', null, calendarButtonClick);">Week</a>
+            {% endif %}
+            {% if scope == 'Day' %}
+                <a id="button-scope-day" href='#' class="btn btn-default disabled">Day</a>
+            {% else %}
+                <a id="button-scope-day" class="btn btn-default" href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': 'Day', 'timestamp': time.timestamp}) }}', null, calendarButtonClick);">Day</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-sm-4-12 text-center">
+        <div class="calendar-date-display">
+            {% if scope == 'Month' %}
+                <h3 class="calendar-date">{{ time|date('F Y') }}</h3>
+            {% elseif scope == 'Week' %}
+                <h3 class="calendar-date ">Week {{ time|date('W Y') }}</h3>
+            {% else %}
+                <h3 class="calendar-date ">{{ time|date('F jS Y') }}</h3>
+            {% endif %}
+        </div>
+        {# this sets the variable superscope to be a higher scope (year for month and week and month for week) for the << and >> buttons #}
         {% if scope == 'Month' %}
-            <a id="button-scope-month" href='#' class='btn btn-primary disabled'>Month</a>
-        {% else %}
-            <a id="button-scope-month" class='btn btn-primary' href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': 'Month', 'timestamp': time.timestamp}) }}', null, calendarButtonClick);">Month</a>
-        {% endif %}
-        {% if scope == 'Week' %}
-            <a id="button-scope-week" href='#' class='btn btn-primary disabled'>Week</a>
-        {% else %}
-            <a id="button-scope-week" class='btn btn-primary' href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': 'Week', 'timestamp': time.timestamp}) }}', null, calendarButtonClick);">Week</a>
-        {% endif %}
-        {% if scope == 'Day' %}
-            <a id="button-scope-day" href='#' class='btn btn-primary disabled'>Day</a>
-        {% else %}
-            <a id="button-scope-day" class='btn btn-primary' href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': 'Day', 'timestamp': time.timestamp}) }}', null, calendarButtonClick);">Day</a>
-        {% endif %}
-    </span>
-    <span class='calendar-date-display'>
-        {% if scope == 'Month' %}
-            <h3 class='calendar-date'>{{ time|date('F Y') }}</h3>
+            {% set superscope = 'Year' %}
         {% elseif scope == 'Week' %}
-            <h3 class='calendar-date'>Week {{ time|date('W Y') }}</h3>
+            {% set superscope = 'Year' %}
         {% else %}
-            <h3 class='calendar-date'>{{ time|date('F jS Y') }}</h3>
+            {% set superscope = 'Month' %}
         {% endif %}
-    </span>
-    {# this sets the variable superscope to be a higher scope (year for month and week and month for week) for the << and >> buttons #}
-    {% if scope == 'Month' %}
-        {% set superscope = 'Year' %}
-    {% elseif scope == 'Week' %}
-        {% set superscope = 'Year' %}
-    {% else %}
-        {% set superscope = 'Month' %}
-    {% endif %}
-    <span class='btn-group calendar-button-group'>
-        {% if scope == 'Month' and (time|date('m') - 1) < time|date_modify('-1 month')|date('m') %}
-            <a id="button-fastrewind" class='btn btn-primary' href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['-1 ', superscope]|join)|date('U')}) }}', null, calendarButtonClick);">&laquo;</a>
-            <a id="button-rewind" class='btn btn-primary' href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['last day of last month']|join)|date('U')}) }}', null, calendarButtonClick);">&lt;</a>
-        {% elseif superscope == 'Month' and (time|date('m') - 1) < time|date_modify('-1 month')|date('m') %}
-            <a id="button-fastrewind" class='btn btn-primary' href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['last day of last month']|join)|date('U')}) }}', null, calendarButtonClick);">&laquo;</a>
-            <a id="button-rewind" class='btn btn-primary' href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['-1 ', scope]|join)|date('U')}) }}', null, calendarButtonClick);">&lt;</a>
-        {% else %}
-            <a id="button-fastrewind" class='btn btn-primary' href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['-1 ', superscope]|join)|date('U')}) }}', null, calendarButtonClick);">&laquo;</a>
-            <a id="button-rewind" class='btn btn-primary' href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['-1 ', scope]|join)|date('U')}) }}', null, calendarButtonClick);">&lt;</a>
-        {% endif %}
-        <a id="button-reset" class='btn btn-primary' href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': 'now'|date('U')}) }}', null, calendarButtonClick);">today</a>
-        {% if scope == 'Month' and (time|date('m') + 1) < time|date_modify('+1 month')|date('m') %}
-            <a id="button-forward" class='btn btn-primary' href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['last day of next month']|join)|date('U')}) }}', null, calendarButtonClick);">&gt;</a>
-            <a id="button-fastforward" href='#' class='btn btn-primary' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['+1 ', superscope]|join)|date('U')}) }}', null, calendarButtonClick);">&raquo;</a>
-        {% elseif superscope == 'Month' and (time|date('m') + 1) < time|date_modify('+1 month')|date('m') %}
-            <a id="button-forward" class='btn btn-primary' href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['+1 ', scope]|join)|date('U')}) }}', null, calendarButtonClick);">&gt;</a>
-            <a id="button-fastforward" href='#' class='btn btn-primary' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['last day of next month']|join)|date('U')}) }}', null, calendarButtonClick);">&raquo;</a>
-        {% else %}
-            <a id="button-forward" class='btn btn-primary' href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['+1 ', scope]|join)|date('U')}) }}', null, calendarButtonClick);">&gt;</a>
-            <a id="button-fastforward" href='#' class='btn btn-primary' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['+1 ', superscope]|join)|date('U')}) }}', null, calendarButtonClick);">&raquo;</a>
-        {% endif %}
-    </span>
+    </div>
+    <div class="col-sm-4-12 text-center">
+        <div class="btn-group calendar-button-group center-block">
+            {% if scope == 'Month' and (time|date('m') - 1) < time|date_modify('-1 month')|date('m') %}
+                <a id="button-fastrewind" class="btn btn-default" href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['-1 ', superscope]|join)|date('U')}) }}', null, calendarButtonClick);">&laquo;</a>
+                <a id="button-rewind" class="btn btn-default" href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['last day of last month']|join)|date('U')}) }}', null, calendarButtonClick);">&lt;</a>
+            {% elseif superscope == 'Month' and (time|date('m') - 1) < time|date_modify('-1 month')|date('m') %}
+                <a id="button-fastrewind" class="btn btn-default" href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['last day of last month']|join)|date('U')}) }}', null, calendarButtonClick);">&laquo;</a>
+                <a id="button-rewind" class="btn btn-default" href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['-1 ', scope]|join)|date('U')}) }}', null, calendarButtonClick);">&lt;</a>
+            {% else %}
+                <a id="button-fastrewind" class="btn btn-default" href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['-1 ', superscope]|join)|date('U')}) }}', null, calendarButtonClick);">&laquo;</a>
+                <a id="button-rewind" class="btn btn-default" href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['-1 ', scope]|join)|date('U')}) }}', null, calendarButtonClick);">&lt;</a>
+            {% endif %}
+            <a id="button-reset" class="btn btn-default" href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': 'now'|date('U')}) }}', null, calendarButtonClick);">today</a>
+            {% if scope == 'Month' and (time|date('m') + 1) < time|date_modify('+1 month')|date('m') %}
+                <a id="button-forward" class="btn btn-default" href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['last day of next month']|join)|date('U')}) }}', null, calendarButtonClick);">&gt;</a>
+                <a id="button-fastforward" href='#' class="btn btn-default" onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['+1 ', superscope]|join)|date('U')}) }}', null, calendarButtonClick);">&raquo;</a>
+            {% elseif superscope == 'Month' and (time|date('m') + 1) < time|date_modify('+1 month')|date('m') %}
+                <a id="button-forward" class="btn btn-default" href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['+1 ', scope]|join)|date('U')}) }}', null, calendarButtonClick);">&gt;</a>
+                <a id="button-fastforward" href='#' class="btn btn-default" onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['last day of next month']|join)|date('U')}) }}', null, calendarButtonClick);">&raquo;</a>
+            {% else %}
+                <a id="button-forward" class="btn btn-default" href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['+1 ', scope]|join)|date('U')}) }}', null, calendarButtonClick);">&gt;</a>
+                <a id="button-fastforward" href='#' class="btn btn-default" onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['+1 ', superscope]|join)|date('U')}) }}', null, calendarButtonClick);">&raquo;</a>
+            {% endif %}
+        </div>
+    </div>
 </div>
-<div class='calendar-display'>
+<div class="calendar-display">
     {% if scope == 'Month' %}
         {% render url('calendar_display_month', {'calendarService': calendar_service, 'params': params, 'scope': 'Month', 'timestamp': time.timestamp}) %}
     {% elseif scope == 'Week' %}
@@ -70,14 +76,14 @@
 </div>
 
 <script type='text/javascript'>
-    window.onload = function() {
-        $('.calendar-widget').on('calendar-change', function() {
-            $('.calendar-multiday-event-container').each(function() {
-                $(this).height(($(this).children('.calendar-multiday-info').text() * 1.7) + 'em');
-            });
+window.onload = function() {
+    $('.calendar-widget').on('calendar-change', function() {
+        $('.calendar-multiday-event-container').each(function() {
+            $(this).height(($(this).children('.calendar-multiday-info').text() * 1.7) + 'em');
         });
-        $('.calendar-widget').trigger('calendar-change');
-    };
+    });
+    $('.calendar-widget').trigger('calendar-change');
+};
 </script>
 
 <div id='calendar-info-service' style='display: none;'>{{ calendar_service }}</div>
