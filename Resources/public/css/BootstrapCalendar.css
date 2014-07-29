@@ -66,7 +66,7 @@
 /* Middle section div for the calendar-date text */
 .calendar-date-display {
     /*width: 33%;*/
-    float: left;
+    /*float: left;*/
 }
 
 /* The container that holds the acutal calendar display under the controls */
@@ -292,7 +292,7 @@
 .calendar-button-group {
 /*    width: 33%;*/
     padding-top: 2%;
-    float:left;
+    /*float: left;*/
 }
 
 .calendar-day-week, .calendar-today-week {

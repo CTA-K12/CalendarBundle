@@ -1,7 +1,7 @@
 {# btn-group is a class in the twitter bootstrap, so this might not look all that great without it, but you can always have your own css sheet that has a class btn-group to make this appear as you want #}
 <script src='{{ asset('bundles/mesdcalendar/js/Calendar.js') }}'></script>
 <div class="calendar-control-bar row">
-    <div class="col-sm-4-12 text-center">
+    <div class="col-sm-4-12">
         <div class="btn-group calendar-button-group">
             {% if scope == 'Month' %}
                 <a id="button-scope-month" href='#' class="btn btn-default disabled">Month</a>
@@ -25,9 +25,9 @@
             {% if scope == 'Month' %}
                 <h3 class="calendar-date">{{ time|date('F Y') }}</h3>
             {% elseif scope == 'Week' %}
-                <h3 class="calendar-date ">Week {{ time|date('W Y') }}</h3>
+                <h3 class="calendar-date">Week {{ time|date('W Y') }}</h3>
             {% else %}
-                <h3 class="calendar-date ">{{ time|date('F jS Y') }}</h3>
+                <h3 class="calendar-date">{{ time|date('F jS Y') }}</h3>
             {% endif %}
         </div>
         {# this sets the variable superscope to be a higher scope (year for month and week and month for week) for the << and >> buttons #}
@@ -40,7 +40,7 @@
         {% endif %}
     </div>
     <div class="col-sm-4-12 text-center">
-        <div class="btn-group calendar-button-group center-block">
+        <div class="btn-group calendar-button-group">
             {% if scope == 'Month' and (time|date('m') - 1) < time|date_modify('-1 month')|date('m') %}
                 <a id="button-fastrewind" class="btn btn-default" href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['-1 ', superscope]|join)|date('U')}) }}', null, calendarButtonClick);">&laquo;</a>
                 <a id="button-rewind" class="btn btn-default" href='#' onClick="$(this).addClass('button-pushed');$(this).closest('.calendar-widget').load('{{ url('calendar_display', {'calendarService': calendar_service, 'params': params, 'scope': scope, 'timestamp': time|date_modify(['last day of last month']|join)|date('U')}) }}', null, calendarButtonClick);">&lt;</a>
