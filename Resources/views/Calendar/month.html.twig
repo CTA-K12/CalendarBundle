@@ -82,7 +82,7 @@
                                             <td class='calendar-day' id='calendar-day-{{ start|date_modify(['+', d, ' day']|join)|date('Y-m-d') }}'>
                                             {% endif %}
                                             <div class='calendar-day-items' id='calendar-day-items-{{ start|date_modify(['+', d, ' day']|join)|date('Y-m-d') }}' style='width: 100%; height: 100%' onClick="$('.calendar-widget').trigger('calendar-day-click', ['{{ start|date_modify(['+', d, ' day']|join)|date('Y-m-d') }}']);">
-                                                <div class='calendar-day-date'>{{ start|date_modify(['+', d, ' day']|join)|date('j') }}</div>
+                                                <div class='calendar-day-date' id="day_{{ start|date_modify(['+', d, ' day']|join)|date('j') }}">{{ start|date_modify(['+', d, ' day']|join)|date('j') }}</div>
                                                 {# SINGLE DAY EVENT LOOP #}
                                                 <div class='calendar-single-event-container'>
                                                     {% for event in events if not event.isMultiDay and event.startDate.format('Y-m-d') == start|date_modify(['+', d, ' day']|join)|date('Y-m-d')%}
