@@ -25,7 +25,7 @@
             {% if scope == 'Month' %}
                 <h3 class="calendar-date">{{ time|date('F Y') }}</h3>
             {% elseif scope == 'Week' %}
-                <h3 class="calendar-date">Week {{ time|date('W Y') }}</h3>
+                <h3 class="calendar-date">Week {{ time|date('W Y') }} ({{ time | date('F')}})</h3>
             {% else %}
                 <h3 class="calendar-date">{{ time|date('F jS Y') }}</h3>
             {% endif %}
