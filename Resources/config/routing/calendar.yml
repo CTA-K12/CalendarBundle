@@ -1,15 +1,15 @@
 calendar_display:
-    pattern:  /show/{calendarService}/{params}/{scope}/{timestamp}
+    path:  /show/{calendarService}/{params}/{scope}/{timestamp}
     defaults: { _controller: MesdCalendarBundle:Calendar:displayCalendar, params: 'null', scope: 'Month', timestamp: null}
 
 calendar_display_day:
-    pattern:  /day/{calendarService}/{params}/{timestamp}
+    path:  /day/{calendarService}/{params}/{timestamp}
     defaults: { _controller: MesdCalendarBundle:Calendar:displayDay, params: ' '}
 
 calendar_display_week:
-    pattern:  /week/{calendarService}/{params}/{timestamp}
+    path:  /week/{calendarService}/{params}/{timestamp}
     defaults: { _controller: MesdCalendarBundle:Calendar:displayWeek, params: ' '}
 
 calendar_display_month:
-    pattern:  /month/{calendarService}/{params}/{timestamp}
+    path:  /month/{calendarService}/{params}/{timestamp}
     defaults: { _controller: MesdCalendarBundle:Calendar:displayMonth, params: ' '}
